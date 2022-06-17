@@ -1,0 +1,139 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+.quote-input {
+  margin: 0;
+  font-family: Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: auto;
+}
+
+.typing-container {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #adadad;
+  width: 700px;
+  max-width: 70%;
+}
+.timer {
+  display: flex;
+  align-items: flex-end;
+  justify-items: flex-end;
+  flex-direction: column;
+  font-size: 1.5rem;
+  color: #025fda;
+  font-weight: bold;
+}
+.quote-display {
+  max-height: 10rem;
+  margin-bottom: 1rem;
+  margin-left: calc(1rem + 2px);
+  margin-right: calc(1rem + 2px);
+  font-size: 1.5rem;
+  line-height: 2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.quote-input {
+  background-color: transparent;
+  border: 2px solid #9f9f9f;
+  outline: none;
+  width: 100%;
+  height: 8rem;
+  margin: auto;
+  resize: none;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  line-height: 2rem;
+}
+
+.quote-input:focus {
+  border-color: #025fda;
+}
+
+.correct {
+  color: #0dc70d;
+}
+
+.incorrect {
+  color: red;
+  text-decoration: underline;
+}
+
+.current {
+  color: #bb00ff;
+  font-weight: 800;
+}
+
+.hidden {
+  visibility: hidden;
+}
+.score-display {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.95);
+  z-index: 1;
+  width: 80vw;
+  margin: auto;
+  border: 1px solid #323232;
+  border-radius: 10px;
+  font-size: 1.5rem;
+}
+
+.score-display h1 {
+  text-align: center;
+  margin: 0;
+  padding: 0.9rem 0;
+  font-size: 2rem;
+}
+
+.score-display .score {
+  margin-left: 2rem;
+  padding: 0.75rem 0;
+}
+
+.score .score-label {
+  font-weight: bold;
+}
+.score-value {
+  padding-left: 0.75rem;
+}
+.btn-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+}
+.btn {
+  outline: none;
+  border: none;
+  font-size: 1.25rem;
+  padding: 0.55em 0.75em;
+  cursor: pointer;
+  border-radius: 0.25em;
+}
+
+.btn-primary {
+  --primary-hue: 211;
+  background-color: hsl(var(--primary-hue), 100%, 50%);
+  color: #fff;
+  transition: background-color 50ms ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: hsl(var(--primary-hue), 100%, 40%);
+}
