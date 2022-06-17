@@ -7,7 +7,7 @@ const scoreDisplayElement = document.querySelector('.score-display');
 let timerInterval;
 
 const TIMEOUT_SECONDS = 60;
-const NUMBER_OF_QUOTES = 1;
+const NUMBER_OF_QUOTES = 5;
 document.addEventListener('gameover', handleGameOver);
 
 const restartBtn = document.getElementById('restartBtn');
