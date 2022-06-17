@@ -1,4 +1,4 @@
-const RANDOM_QUOTE_API_URL = 'http://staging.quotable.io/random';
+const RANDOM_QUOTE_API_URL = 'https://api.quotable.io/random';
 
 const quoteDisplayElement = document.querySelector('#quoteDisplay');
 const quoteInputElement = document.querySelector('#quoteInput');
@@ -7,7 +7,7 @@ const scoreDisplayElement = document.querySelector('.score-display');
 let timerInterval;
 
 const TIMEOUT_SECONDS = 60;
-
+const NUMBER_OF_QUOTES = 5;
 document.addEventListener('gameover', handleGameOver);
 
 const restartBtn = document.getElementById('restartBtn');
@@ -118,8 +118,8 @@ function getRandomQuotes(n) {
   });
 }
 
-function renderNewQuote() {
-  return getRandomQuotes(2).then((quote) => {
+function renderNewQuote(n) {
+  return getRandomQuotes(n).then((quote) => {
     const tokens = quote.split(' ');
     quoteDisplayElement.innerHTML = '';
     tokens.forEach((word, i) => {
@@ -182,7 +182,7 @@ function startTimer() {
 
 function startGame() {
   scoreDisplayElement.classList.add('hidden');
-  renderNewQuote().then(() => {
+  renderNewQuote(NUMBER_OF_QUOTES).then(() => {
     quoteInputElement.disabled = false;
     quoteInputElement.focus();
     quoteInputElement.value = null;
