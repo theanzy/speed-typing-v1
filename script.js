@@ -1,4 +1,4 @@
-const RANDOM_QUOTE_API_URL = 'https://api.quotable.io/random';
+const RANDOM_QUOTE_API_URL = 'https://staging.quotable.io/random';
 
 const quoteDisplayElement = document.querySelector('#quoteDisplay');
 const quoteInputElement = document.querySelector('#quoteInput');
@@ -7,7 +7,7 @@ const scoreDisplayElement = document.querySelector('.score-display');
 let timerInterval;
 
 const TIMEOUT_SECONDS = 60;
-const NUMBER_OF_QUOTES = 5;
+const NUMBER_OF_QUOTES = 1;
 document.addEventListener('gameover', handleGameOver);
 
 const restartBtn = document.getElementById('restartBtn');
@@ -35,7 +35,8 @@ function handleGameOver() {
   const typos = totalWordCount - correctSpans.length;
   // wpm net
   const netWPM = Math.floor((grossWPM * accuracy) / 100);
-  scoreDisplayElement.classList.remove('hidden');
+  scoreDisplayElement.style.visibility = 'visible';
+  scoreDisplayElement.style.opacity = '1';
   document.getElementById('scoreTypingSpeed').textContent = `${grossWPM}`;
   document.getElementById('scoreAccuracy').textContent = `${accuracy.toFixed(
     2
@@ -103,7 +104,10 @@ function handleTyping() {
 }
 
 function getRandomQuote() {
-  return fetch(RANDOM_QUOTE_API_URL)
+  return fetch(RANDOM_QUOTE_API_URL, {
+    method: 'get',
+    mode: 'cors',
+  })
     .then((res) => res.json())
     .then((data) => data.content);
 }
@@ -181,7 +185,8 @@ function startTimer() {
 }
 
 function startGame() {
-  scoreDisplayElement.classList.add('hidden');
+  scoreDisplayElement.style.visibility = 'hidden';
+  scoreDisplayElement.style.opacity = '0';
   renderNewQuote(NUMBER_OF_QUOTES).then(() => {
     quoteInputElement.disabled = false;
     quoteInputElement.focus();

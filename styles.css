@@ -81,16 +81,21 @@ body,
 
 .hidden {
   visibility: hidden;
+  opacity: 0;
+  transition: 1ms, opacity 1s ease-in-out;
 }
+
 .score-display {
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: #fff;
   z-index: 1;
   width: 80vw;
   margin: auto;
   border: 1px solid #323232;
   border-radius: 10px;
   font-size: 1.5rem;
+  opacity: 1;
+  transition: visibility 1ms linear, opacity 250ms linear;
 }
 
 .score-display h1 {
