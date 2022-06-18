@@ -1,4 +1,4 @@
-const RANDOM_QUOTE_API_URL = 'https://staging.quotable.io/random';
+const RANDOM_QUOTE_API_URL = 'https://api.quotable.io/quotes';
 
 const quoteDisplayElement = document.querySelector('#quoteDisplay');
 const quoteInputElement = document.querySelector('#quoteInput');
@@ -103,27 +103,24 @@ function handleTyping() {
   }
 }
 
+function randomBetween(start, end) {
+  return Math.floor(start + Math.random() * (end + 1));
+}
+
 function getRandomQuote() {
-  return fetch(RANDOM_QUOTE_API_URL, {
+  const url = new URL(RANDOM_QUOTE_API_URL);
+  const params = { page: randomBetween(1, 94) };
+  url.search = new URLSearchParams(params).toString();
+  return fetch(url, {
     method: 'get',
     mode: 'cors',
   })
     .then((res) => res.json())
-    .then((data) => data.content);
+    .then((data) => data.results.map((quote) => quote.content).join(' '));
 }
 
-function getRandomQuotes(n) {
-  const promises = [];
-  for (let i = 0; i < n; i++) {
-    promises.push(getRandomQuote());
-  }
-  return Promise.all(promises).then((values) => {
-    return values.join(' ');
-  });
-}
-
-function renderNewQuote(n) {
-  return getRandomQuotes(n).then((quote) => {
+function renderNewQuote() {
+  return getRandomQuote().then((quote) => {
     const tokens = quote.split(' ');
     quoteDisplayElement.innerHTML = '';
     tokens.forEach((word, i) => {
@@ -185,9 +182,10 @@ function startTimer() {
 }
 
 function startGame() {
+  quoteDisplayElement.scrollTop = 0;
   scoreDisplayElement.style.visibility = 'hidden';
   scoreDisplayElement.style.opacity = '0';
-  renderNewQuote(NUMBER_OF_QUOTES).then(() => {
+  renderNewQuote().then(() => {
     quoteInputElement.disabled = false;
     quoteInputElement.focus();
     quoteInputElement.value = null;
